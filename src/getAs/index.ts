@@ -6,6 +6,7 @@ import { asImperialVolume, asImperialVolumeReverse } from "./imperialVolume";
 import { asMetricArea, asMetricAreaReverse } from "./metricArea";
 import { asMetricDistance } from "./metricDistance";
 import { asMetricVolume, asMetricVolumeReverse } from "./metricVolume";
+import { asMetricWeight } from "./metricWeight";
 import { asNumber } from "./number";
 
 export function getAs(cells: Cell[]) {
@@ -15,5 +16,6 @@ export function getAs(cells: Cell[]) {
         asImperialVolume(cells) ?? asImperialVolumeReverse(cells) ??
         asMetricArea(cells) ?? asMetricAreaReverse(cells) ?? 
         asMetricVolume(cells) ?? asMetricVolumeReverse(cells) ?? 
+        asMetricWeight(cells) ??
         asNumber(cells) ?? cells 
 }
