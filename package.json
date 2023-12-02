@@ -1,0 +1,26 @@
+{
+  "name": "mapsdraw",
+  "version": "1.0.0",
+  "description": "aa",
+  "main": "index.js",
+  "browserslist": [
+    "chrome >= 112",
+    "firefox >= 112"
+  ],
+  "scripts": {
+    "common": "rm -rf build && webpack --config webpack.config.js && cp -r static/. build/unpacked && find build   -name '.DS_Store' -type f -delete",
+    "test": "export NODE_ENV=development && npm run common",
+    "build": "export NODE_ENV=production && npm run common && cd build/unpacked && zip -r ../packed.zip ."
+  },
+  "author": "aa",
+  "dependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/chrome": "^0.0.243",
+    "babel-loader": "^9.1.3",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

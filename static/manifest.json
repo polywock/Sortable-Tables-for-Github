@@ -1,0 +1,19 @@
+{
+  "name": "Sortable Markdown Tables for Github",
+  "version": "1.0",
+  "description": "Makes Github markdown tables sortable.",
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "icons": { 
+    "128": "128.png" 
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

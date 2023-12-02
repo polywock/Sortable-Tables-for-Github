@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.iterable", "ESNext", "WebWorker"],
+    "types": ["@types/chrome"],
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    "noImplicitAny": true,
+    "allowJs": true,
+    "sourceMap": false
+  },
+  "exclude": ["./node_modules", "./build"]
+}
