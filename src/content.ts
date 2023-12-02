@@ -102,6 +102,8 @@ window.addEventListener("click", e => {
         return a.text.localeCompare(b.text)
     })
 
+    console.log(cells)
+
     if (sortByColumn) {
       cells.forEach(cell => {
         const row = cell.elem.parentElement

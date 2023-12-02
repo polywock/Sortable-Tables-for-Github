@@ -30,3 +30,4 @@
 | Football Field    |   -          |   5,350 square meters   |   -                   |
 | Sri Lanka         |   -          |   65,610 km²            |   -                   |
 | Olympic pool      |   2,500 tons |   1,250 m²              |   2,500 cubic meters  |
+| Shipping Container|   2 tons     |   -                     |   -                   |
