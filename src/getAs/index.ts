@@ -8,7 +8,7 @@ import { asMetricArea } from "./metricArea";
 import { asMetricDistance } from "./metricDistance";
 import { asMetricVolume } from "./metricVolume";
 import { asMetricWeight } from "./metricWeight";
-import { asNumber } from "./number";
+import { asNumberIfNone } from "./number";
 
 export function getAs(cells: Cell[]) {
     cells = asByte(cells) ?? 
@@ -20,7 +20,9 @@ export function getAs(cells: Cell[]) {
         asImperialArea(cells) ??
         asImperialDistance(cells) ?? 
         asImperialWeight(cells) ??
-        asNumber(cells) ?? cells 
+        cells 
+
+    cells = asNumberIfNone(cells)
 
     cells?.forEach(c => {
         if (c.scalar != null && c.normal != null) {

@@ -21,14 +21,14 @@
 
 
 ## Random units
-| Text  |   Weight           |  Area                   |  Volume               | Numbers     | storage     |
-|:-----:|:------------------:|:-----------------------:|:---------------------:|:-----------:|:-----------:|
-| A     |   5 grams          |   10 km sq              |   3000 cm³            | 200         | 1 yottabytes |
-| B     |   2001 kg          |   200 meters squared    |   1.76 cubic meters   | 05.2        | 20 terabytes |   
+| Text  |   Weight           |  Area                   |  Volume               | Numbers     | storage      |
+|:-----:|:------------------:|:-----------------------:|:---------------------:|:-----------:|:------------:|
+| A     |   5 grams          |   10 km sq              |   3000 cm³            | 200         | 1 kb         |
+| B     |   2001 kg          |   200 meters squared    |   1.76 cubic meters   | 3B          | 20 terabytes |   
 | C     |   100 kilo         |   3 cm²                 |   -                   | 82k         | 1.1k bytes   |
 | D     |   200 mg           |   301 mm²               |   -                   | 10 million  | 1 gb         |
 | E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  | 200 mb       | 
 | F     |   1 trillion grams |   65,610 km²            |   -                   | 1,001k      | 500 exabytes |
 | G     |   2,500 tons       |   1,250 m²              |   2,500 cubic meters  | 1m          | 900 petabytes|
-| H     |   2 tons           |   -                     |   -                   | 123,456     | 1 kb         |
+| H     |   2 tons           |   -                     |   -                   | 123,456     | 1 yottabytes |
 

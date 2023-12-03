@@ -17,13 +17,14 @@ function conversion(base: string) {
 
 const unitMap = {
     b: 1 ** 0,
-    kb: 1024 ** 1,
-    mb: 1024 ** 2,
-    gb: 1024 ** 3,
-    tb: 1024 ** 4,
-    eb: 1024 ** 5,
-    zb: 1024 ** 6,
-    yb: 1024 ** 7,
+    kb: 1000 ** 1,
+    mb: 1000 ** 2,
+    gb: 1000 ** 3,
+    tb: 1000 ** 4,
+    pb: 1000 ** 5,
+    eb: 1000 ** 6,
+    zb: 1000 ** 7,
+    yb: 1000 ** 8,
 }
 
 export function asByte(cells: Cell[]) {
@@ -31,9 +32,10 @@ export function asByte(cells: Cell[]) {
     let units = new Set() 
     for (let cell of cells) {
         const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(yottabytes?|yottabits?|exabytes?|exabits?|petabytes?|petabits?|terabytes?|terabits?|gigabytes?|gigabits?|megabytes?|megabits?|kilobytes?|kilobits?|bytes?|bits?|kb|mb|gb|tb|pb|eb|zb|yb|b)(?![a-z0-9])/.exec(cell.text)
+        console.log(match)
         if (!match) continue 
         const unit = match[2]
-        const scalar = unitMap[unit as keyof typeof unitMap]
+        const scalar = unitMap[conversion(unit) as keyof typeof unitMap]
         if (!scalar) continue 
 
         cell.number = parseFloat(match[1])
