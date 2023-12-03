@@ -1,6 +1,6 @@
 
 import { getAs } from "./getAs"
-import { getAbbrUnit, shouldAvoidM } from "./getAs/abbr"
+import { getAbbrUnit, shouldAvoidB, shouldAvoidM } from "./getAs/abbr"
 import { assertType, Cell } from "./types"
 
 declare global {
@@ -56,8 +56,9 @@ window.addEventListener("click", e => {
     let sortByColumn = y === 0
     let elements = sortByColumn ? columnElements : rowElements
     const avoidM = shouldAvoidM(elements.map(v => v.textContent))
+    const avoidB = shouldAvoidB(elements.map(v => v.textContent))
 
-    let cells = elements.map(v => ({elem: v, ...getAbbrUnit(clean(v.textContent), avoidM)}) as Cell)
+    let cells = elements.map(v => ({elem: v, ...getAbbrUnit(clean(v.textContent), avoidM, avoidB)}) as Cell)
     cells = getAs(cells).slice(1)
 
     if (table.latest && table.latest !== current) {
