@@ -21,13 +21,14 @@
 
 
 ## Random units
-| Stuff             |   Weight     |  Area                   |  Volume               | 
-|:-----------------:|:------------:|:-----------------------:|:---------------------:|
-| Paperclip         |   1 gram     |   -                     |   -                   |
-| Human             |   60 kg      |   -                     |   1.76 cubic feet     |
-| Jet Plane         |   120 tons   |   -                     |   -                   |
-| Grain of sugar    |   3 mg       |   -                     |   -                   |
-| Football Field    |   -          |   5,350 square meters   |   -                   |
-| Sri Lanka         |   -          |   65,610 km²            |   -                   |
-| Olympic pool      |   2,500 tons |   1,250 m²              |   2,500 cubic meters  |
-| Shipping Container|   2 tons     |   -                     |   -                   |
+| Stuff |   Weight           |  Area                   |  Volume               | Numbers     | 
+|:-----:|:------------------:|:-----------------------:|:---------------------:|:-----------:|
+| A     |   5 grams          |   10 km sq              |   3000 cm³            | 200         |
+| B     |   2001 kg          |   200 meters squared    |   1.76 cubic meters   | 05.2        |
+| C     |   100 kilo         |   3 cm²                 |   -                   | 82k         |
+| D     |   200 mg           |   301 mm²               |   -                   | 10 million  |
+| E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  |
+| F     |   1 trillion grams |   65,610 km²            |   -                   | 1,001k      |
+| G     |   2,500 tons       |   1,250 m²              |   2,500 cubic meters  | 1m          |
+| H     |   2 tons           |   -                     |   -                   | 123,456     |
+

@@ -1,11 +1,11 @@
 import { Cell } from "../types"
 
 function conversion(base: string) {
-    return base.replace("cubed", "cb").replace("cube", "cb").replace("³", "cb")
-        .replace("millimeters", "mm").replace("millimeter", "mm")
-        .replace("centimeters", "cm").replace("centimeter", "cm")
-        .replace("kilometers", "km").replace("kilometer", "km")
-        .replace("meters", "m").replace("meter", "m")
+    return base.replace("cubed", "cb").replace("cubic", "cb").replace("cube", "cb").replace("³", "cb")
+        .replace(/millimeters?/, "mm")
+        .replace(/centimeters?/, "cm")
+        .replace(/kilometers?/, "km")
+        .replace(/meters?/, "m")
         .replace(/\s/g, "")
 }
 
@@ -26,7 +26,9 @@ export function asMetricVolume(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:cubed|cube|cb|³)\s*(?:millimeter|centimeter|kilometer|meter|mm|cm|km|m))/.exec(cell.text)
+        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:cubed|cubic|cube|cb|³)\s*(?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m))(?![a-z0-9])/.exec(cell.text)
+        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)\s*(?:³|cubed|cubic|cube|cb))(?![a-z0-9])/.exec(cell.text)
+        const match = matchA ?? matchB 
         if (!match) continue 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]
@@ -34,25 +36,6 @@ export function asMetricVolume(cells: Cell[]) {
 
         cell.number = parseFloat(match[1])
         cell.normal = scalar * cell.number  
-        units.add(unit)
-    }
-
-    if (units.size >= 2) {
-        return cells 
-    }
-}
-
-export function asMetricVolumeReverse(cells: Cell[]) {
-    cells = [...cells]
-    let units = new Set() 
-    for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:millimeters|millimeter|centimeters|centimeter|kilometers|kilometer|meters|meter|mm|cm|km|m)\s*(?:³|cubed|cube|cb))/.exec(cell.text)
-        if (!match) continue 
-
-        const unit = conversion(match[2])
-
-        cell.number = parseFloat(match[1])
-        cell.normal = unitMap[unit as keyof typeof unitMap] * cell.number  
         units.add(unit)
     }
 

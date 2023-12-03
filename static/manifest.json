@@ -1,7 +1,7 @@
 {
-  "name": "Sortable Markdown Tables for Github",
-  "version": "1.0",
-  "description": "Makes Github markdown tables sortable.",
+  "name": "Sortable Tables On GitHub",
+  "version": "1.1",
+  "description": "Makes GitHub markdown tables sortable.",
   "manifest_version": 3,
   "permissions": ["storage"],
   "icons": { 

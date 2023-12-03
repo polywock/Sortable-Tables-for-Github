@@ -1,5 +1,6 @@
 
 import { getAs } from "./getAs"
+import { getAbbrUnit, shouldAvoidM } from "./getAs/abbr"
 import { assertType, Cell } from "./types"
 
 declare global {
@@ -47,12 +48,16 @@ window.addEventListener("click", e => {
     const y = rows.findIndex(r => [...r.children].includes(current as any))
     if (x < 0 || y < 0 || (x !== 0 && y !== 0)) return 
 
-    // get cells 
-    let columnCells = [...table.querySelectorAll(`tr td:nth-child(${x + 1}), tr th:nth-child(${x + 1})`)].map(v => ({elem: v, text: v.textContent}) as Cell)
-    let rowCells = [...current.closest("tr").querySelectorAll("td, th")].map(v => ({elem: v, text: v.textContent}) as Cell)
+    const columnElements =  [...table.querySelectorAll(`tr td:nth-child(${x + 1}), tr th:nth-child(${x + 1})`)];
+    const rowElements =  [...current.closest("tr").querySelectorAll("td, th")]
+
+
 
     let sortByColumn = y === 0
-    let cells = sortByColumn ? columnCells : rowCells
+    let elements = sortByColumn ? columnElements : rowElements
+    const avoidM = shouldAvoidM(elements.map(v => v.textContent))
+
+    let cells = elements.map(v => ({elem: v, ...getAbbrUnit(clean(v.textContent), avoidM)}) as Cell)
     cells = getAs(cells).slice(1)
 
     if (table.latest && table.latest !== current) {
@@ -102,8 +107,6 @@ window.addEventListener("click", e => {
         return a.text.localeCompare(b.text)
     })
 
-    console.log(cells)
-
     if (sortByColumn) {
       cells.forEach(cell => {
         const row = cell.elem.parentElement
@@ -138,5 +141,8 @@ window.addEventListener("click", e => {
 })
 
 
+function clean(a: string) {
+  return a.toLocaleLowerCase().replace(/(?<=\d)[,\s\-\_\:](?=\d)/, "")
+}
 
 

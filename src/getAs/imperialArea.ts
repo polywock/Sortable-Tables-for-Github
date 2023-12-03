@@ -2,10 +2,10 @@ import { Cell } from "../types"
 
 function conversion(base: string) {
     return base.replace("squared", "sq").replace("square", "sq").replace("²", "sq")
-        .replace("inches", "in").replace("inch", "in")
-        .replace("feets", "ft").replace("feet", "ft").replace("foot", "ft")
-        .replace("yards", "yd").replace("yard", "yd")
-        .replace("miles", "mi").replace("mile", "mi")
+        .replace(/(inches|inch)/, "in")
+        .replace(/(feets?|foots?)/, "ft")
+        .replace(/yards?/, "yd")
+        .replace(/(miles|mile)/, "mi")
         .replace(/\s/g, "")
 }
 
@@ -26,7 +26,9 @@ export function asImperialArea(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:squared|square|sq|²)\s*(?:inches|inch|in|feets|foot|feet|ft|yards|yard|yd|miles|mile|mi))/.exec(cell.text)
+        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:squared|square|sq|²)\s*(?:inches|inch|foots?|feets?|yards|miles|mile|mi|in|ft|yd))(?![a-z0-9])/.exec(cell.text)
+        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:inches|inch|foots?|feets?|yards|miles|mile|mi|in|ft|yd)\s*(?:²|squared|square|sq))(?![a-z0-9])/.exec(cell.text)
+        const match = matchA ?? matchB 
         if (!match) continue 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]
@@ -42,21 +44,3 @@ export function asImperialArea(cells: Cell[]) {
     }
 }
 
-export function asImperialAreaReverse(cells: Cell[]) {
-    cells = [...cells]
-    let units = new Set() 
-    for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:inches|inch|in|feets|foot|feet|ft|yards|yard|yd|miles|mile|mi)\s*(?:²|squared|square|sq))/.exec(cell.text)
-        if (!match) continue 
-
-        const unit = conversion(match[2])
-
-        cell.number = parseFloat(match[1])
-        cell.normal = unitMap[unit as keyof typeof unitMap] * cell.number  
-        units.add(unit)
-    }
-
-    if (units.size >= 2) {
-        return cells 
-    }
-}

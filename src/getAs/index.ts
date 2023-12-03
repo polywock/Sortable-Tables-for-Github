@@ -1,21 +1,32 @@
 import { Cell } from "../types";
 import { asByte } from "./byte";
-import { asImperialArea, asImperialAreaReverse } from "./imperialArea";
+import { asImperialArea } from "./imperialArea";
 import { asImperialDistance } from "./imperialDistance";
-import { asImperialVolume, asImperialVolumeReverse } from "./imperialVolume";
-import { asMetricArea, asMetricAreaReverse } from "./metricArea";
+import { asImperialVolume } from "./imperialVolume";
+import { asImperialWeight } from "./imperialWeight";
+import { asMetricArea } from "./metricArea";
 import { asMetricDistance } from "./metricDistance";
-import { asMetricVolume, asMetricVolumeReverse } from "./metricVolume";
+import { asMetricVolume } from "./metricVolume";
 import { asMetricWeight } from "./metricWeight";
 import { asNumber } from "./number";
 
 export function getAs(cells: Cell[]) {
-    return asByte(cells) ?? 
-        asImperialDistance(cells) ?? asMetricDistance(cells) ??
-        asImperialArea(cells) ?? asImperialAreaReverse(cells) ?? 
-        asImperialVolume(cells) ?? asImperialVolumeReverse(cells) ??
-        asMetricArea(cells) ?? asMetricAreaReverse(cells) ?? 
-        asMetricVolume(cells) ?? asMetricVolumeReverse(cells) ?? 
+    cells = asByte(cells) ?? 
+        asMetricVolume(cells) ?? 
         asMetricWeight(cells) ??
+        asMetricArea(cells) ??
+        asMetricDistance(cells) ??
+        asImperialVolume(cells) ??
+        asImperialArea(cells) ??
+        asImperialDistance(cells) ?? 
+        asImperialWeight(cells) ??
         asNumber(cells) ?? cells 
+
+    cells?.forEach(c => {
+        if (c.scalar != null && c.normal != null) {
+            c.normal *= c.scalar
+        }
+    })
+
+    return cells 
 }

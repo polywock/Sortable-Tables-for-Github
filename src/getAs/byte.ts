@@ -15,7 +15,7 @@ export function asByte(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(b|kb|mb|gb|tb|pb|eb|zb|yb)/.exec(cell.text)
+        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(b|kb|mb|gb|tb|pb|eb|zb|yb)(?![a-z0-9])/.exec(cell.text)
         if (!match) continue 
         const unit = match[2]
         const scalar = unitMap[unit as keyof typeof unitMap]

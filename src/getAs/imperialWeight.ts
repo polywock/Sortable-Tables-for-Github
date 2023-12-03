@@ -2,25 +2,24 @@ import { Cell } from "../types"
 
 function conversion(base: string) {
     return base
-        .replace(/(inches|inch)/, "in")
-        .replace(/(feets?|foots?)/, "ft")
-        .replace(/yards?/, "yd")
-        .replace(/(miles|mile)/, "mi")
+        .replace(/pounds?/, "lb")
+        .replace(/lbs/, "lb")
+        .replace(/tons/, "ton")
+        .replace(/(ounces|ounce)/, "oz")
         .replace(/\s/g, "")
 }
 
 const unitMap = {
-    in: 1,
-    ft: 12,
-    yd: 36,
-    mi: 63360
+    oz: 1,
+    lb: 16,
+    ton: 2000
 }
 
-export function asImperialDistance(cells: Cell[]) {
+export function asImperialWeight(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(inches|inch|feets?|foots?|yards?|miles|mile|in|ft|yd|mi)(?![a-z0-9])/.exec(cell.text)
+        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(tons?|pounds?|ounces|ounce|lbs?|oz)(?![a-z0-9])/.exec(cell.text)
         if (!match) continue 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]

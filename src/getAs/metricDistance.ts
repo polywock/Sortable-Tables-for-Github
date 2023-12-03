@@ -20,7 +20,7 @@ export function asMetricDistance(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(millimeter|centimeter|kilometer|meter|mm|cm|km|m)/.exec(cell.text)
+        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)(?![a-z0-9])/.exec(cell.text)
         if (!match) continue 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]
