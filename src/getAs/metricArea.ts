@@ -30,7 +30,6 @@ export function asMetricArea(cells: Cell[]) {
         const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)\s*(?:²|squared|square|sq))(?![a-z0-9])/.exec(cell.text)
         const match = matchA ?? matchB 
         if (!match) continue 
-        console.log("MATCH: ", match)
 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]

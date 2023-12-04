@@ -21,10 +21,10 @@ export function getAs(cells: Cell[]) {
         asImperialDistance(cells) ?? 
         asImperialWeight(cells) ??
         cells 
+        
+    asNumberIfNone(cells)
 
-    cells = asNumberIfNone(cells)
-
-    cells?.forEach(c => {
+    cells.forEach(c => {
         if (c.scalar != null && c.normal != null) {
             c.normal *= c.scalar
         }

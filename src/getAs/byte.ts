@@ -32,7 +32,6 @@ export function asByte(cells: Cell[]) {
     let units = new Set() 
     for (let cell of cells) {
         const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(yottabytes?|yottabits?|exabytes?|exabits?|petabytes?|petabits?|terabytes?|terabits?|gigabytes?|gigabits?|megabytes?|megabits?|kilobytes?|kilobits?|bytes?|bits?|kb|mb|gb|tb|pb|eb|zb|yb|b)(?![a-z0-9])/.exec(cell.text)
-        console.log(match)
         if (!match) continue 
         const unit = match[2]
         const scalar = unitMap[conversion(unit) as keyof typeof unitMap]

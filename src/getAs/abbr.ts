@@ -11,12 +11,12 @@ function conversion(base: string) {
   
   
 const unitMap = {
-    k: 1_000,
-    m: 1_000_000,
-    b: 1_000_000_000,
-    t: 1_000_000_000_000,
-    quad: 1_000_000_000_000_000,
-    quin: 1_000_000_000_000_000_000
+    k: 1E3,
+    m: 1E6,
+    b: 1E9,
+    t: 1E12,
+    quad: 1E15,
+    quin: 1E18
 }
 
 const REG = /(?<=\d\s*)(quintillions?|quadrillions?|trillions?|billions?|millions?|thousands?|k|m|b|t)(?![a-z0-9])/

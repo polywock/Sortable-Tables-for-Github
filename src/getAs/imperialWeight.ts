@@ -21,6 +21,7 @@ export function asImperialWeight(cells: Cell[]) {
     for (let cell of cells) {
         const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(tons?|pounds?|ounces|ounce|lbs?|oz)(?![a-z0-9])/.exec(cell.text)
         if (!match) continue 
+
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]
         if (!scalar) continue 
