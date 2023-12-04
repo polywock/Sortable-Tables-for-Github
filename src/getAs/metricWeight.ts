@@ -1,18 +1,7 @@
 import { Cell } from "../types"
+import { COMP_METRIC_WEIGHT_A, IMPERIAL_WEIGHT_PARTS, convert } from "./constants"
 
-function conversion(base: string) {
-    return base
-        .replace(/milligrams?/, "mg")
-        .replace(/centigrams?/, "cg")
-        .replace(/decigrams?/, "dg")
-        .replace(/decagrams?/, "dag")
-        .replace(/hectograms?/, "hg")
-        .replace(/kilograms?/, "kg")
-        .replace(/kilos?/, "kg")
-        .replace(/tons?/, "ton")
-        .replace(/grams?/, "g")
-        .replace(/\s/g, "")
-}
+const conversion = (base: string) => convert([...IMPERIAL_WEIGHT_PARTS], base)
 
 const unitMap = {
     mg: 1,
@@ -29,7 +18,7 @@ export function asMetricWeight(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(milligrams?|centigrams?|decigrams?|decagras|hectograms?|kilograms?|kilos?|tons?|grams?|mgs?|cg|dg|g|dag|hg|kgs?)(?![a-z0-9])/.exec(cell.text)
+        const match = COMP_METRIC_WEIGHT_A.exec(cell.text)
         if (!match) continue 
         const unit = conversion(match[2])
         const scalar = unitMap[unit as keyof typeof unitMap]

@@ -1,33 +1,29 @@
 import { Cell } from "../types"
+import { COMP_METRIC_AREA_A, COMP_METRIC_AREA_B, METRIC_DISTANCE_PARTS, SQUARED_PARTS, convert } from "./constants"
+import { metricDistanceUnits } from "./metricDistance"
 
-function conversion(base: string) {
-    return base.replace("squared", "sq").replace("square", "sq").replace("²", "sq")
-        .replace(/millimeters?/, "mm")
-        .replace(/centimeters?/, "cm")
-        .replace(/kilometers?/, "km")
-        .replace(/meters?/, "m")
-        .replace(/\s/g, "")
-}
+
+const conversion = (base: string) => convert([...METRIC_DISTANCE_PARTS, ...SQUARED_PARTS], base)
 
 
 const unitMap = {
-    sqmm: 1,
-    sqcm: 100,
-    sqm: 1000000,
-    sqkm: 1000000000000,
+    sqmm: metricDistanceUnits.mm ** 2,
+    sqcm: metricDistanceUnits.cm ** 2,
+    sqm: metricDistanceUnits.m ** 2,
+    sqkm: metricDistanceUnits.km ** 2,
 
-    mmsq: 1,
-    cmsq: 100,
-    msq: 1000000,
-    kmsq: 1000000000000,
+    mmsq: metricDistanceUnits.mm ** 2,
+    cmsq: metricDistanceUnits.cm ** 2,
+    msq: metricDistanceUnits.m ** 2,
+    kmsq: metricDistanceUnits.km ** 2,
 }
 
 export function asMetricArea(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:squared|square|sq|²)\s*(?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m))(?![a-z0-9])/.exec(cell.text)
-        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)\s*(?:²|squared|square|sq))(?![a-z0-9])/.exec(cell.text)
+        const matchA = COMP_METRIC_AREA_A.exec(cell.text)
+        const matchB = COMP_METRIC_AREA_B.exec(cell.text)
         const match = matchA ?? matchB 
         if (!match) continue 
 

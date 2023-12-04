@@ -1,4 +1,5 @@
 import { Cell } from "../types";
+import { asSemantic, asSemanticAlt } from "./asSemantic";
 import { asByte } from "./byte";
 import { asImperialArea } from "./imperialArea";
 import { asImperialDistance } from "./imperialDistance";
@@ -11,7 +12,10 @@ import { asMetricWeight } from "./metricWeight";
 import { asNumberIfNone } from "./number";
 
 export function getAs(cells: Cell[]) {
-    cells = asByte(cells) ?? 
+    cells = 
+        asSemantic(cells) ?? 
+        asSemanticAlt(cells) ?? 
+        asByte(cells) ?? 
         asMetricVolume(cells) ?? 
         asMetricWeight(cells) ??
         asMetricArea(cells) ??
@@ -21,7 +25,7 @@ export function getAs(cells: Cell[]) {
         asImperialDistance(cells) ?? 
         asImperialWeight(cells) ??
         cells 
-        
+
     asNumberIfNone(cells)
 
     cells.forEach(c => {

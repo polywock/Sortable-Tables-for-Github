@@ -21,27 +21,27 @@
 
 
 ## Metric / other 
-| Text  |   Weight           |  Area                   |  Volume               | Numbers     | byes         |
+| Text  |   Weight           |  Area                   |  Volume               | Numbers     | bytes        |
 |:-----:|:------------------:|:-----------------------:|:---------------------:|:-----------:|:------------:|
-| A     |   5 grams          |   10 km sq              |   1001 cm³            | 200         | 1 kB         |
+| A     |   5 grams          |   10 km sq              |   1001 cm³            | 200         | 1 KB         |
 | B     |   2001 kg          |   200 meters squared    |   1.76 cubic meters   | 3B          | 20 terabytes |   
 | C     |   100 kilo         |   3 cm²                 |   1 liter             | 82k         | 1.1k bytes   |
-| D     |   200 mg           |   301 mm²               |   100 ml              | 10 million  | 1 gB         |
-| E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  | 200 mB       | 
+| D     |   200 mg           |   301 mm²               |   100 ml              | 10 million  | 1 GB         |
+| E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  | 200 MB       | 
 | F     |   1 trillion grams |   65,610 km²            |   -                   | 1,001k      | 500 exabytes |
 | G     |   2,500 tons       |   1,250 m²              |   2,500 cubic meters  | 1m          | 900 petabytes|
-| H     |   2 tons           |   -                     |   -                   | 123,456     | 1 yottabytes |
+| H     |   2 tons           |   -                     |   1002 cm ^3          | 123,456     | 1 yottabytes |
 
 
 ## Imperial / other
-| Text  | Weight   |  Area                |  Volume               |  bits        |
-|:-----:|:--------:|:--------------------:|:---------------------:|-------------:|
-| A     |   5 oz   |   10 miles sq        |   3000 in³            |  1 kb        |
-| B     |   17 oz  |   200 yards squared  |   1.76 cubic feet     |  20 terabits |   
-| C     |   1 lbs  |   3 in²              |   1 gallon            |  1.1k bits   |
-| D     |   5 tons |   1 trillion mi²     |   3 quarts            |  1 gb        |
-| E     |   -      |   5,350 square yards |   2 pint              |  200 mb      | 
-| F     |   1m oz  |   65,610 mi²         |   17 cups             |  500 ebits   |
-| G     |   -      |   1,250 yd²          |   2,500 cubic yards   |  2 gbits     |
-| H     |   -      |   -                  |   -                   |  1 yottabits |
+| Text  | Weight   |  Area                |  Volume               |  bits        |  Semantic versioning |
+|:-----:|:--------:|:--------------------:|:---------------------:|:------------:|:--------------------:|
+| A     |   5 oz   |   10 miles sq        |   3000 in³            |  1 kb        |  version 2.001.91    | 
+| B     |   17 oz  |   200 yards squared  |   1.76 cubic feet     |  20 terabits |  version 12.123.95   |
+| C     |   1 lbs  |   3 in²              |   1 gallon            |  1.1k bits   |  version 2.35.15     |
+| D     |   5 tons |   1 trillion mi²     |   3 quarts            |  1 gb        |  version 12.123.96   |
+| E     |   -      |   5,350 square yards |   2 pint              |  200 mb      |  version 2.4.001     |
+| F     |   1m oz  |   65,610 mi²         |   17 cups             |  500 ebits   |  version 2.4.01      |
+| G     |   -      |   1,250 yd²          |   2,500 cubic yards   |  2 gbits     |                      |
+| H     |   -      |   -                  |   -                   |  1 yottabits |                      |
 

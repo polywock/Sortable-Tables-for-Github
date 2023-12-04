@@ -1,46 +1,39 @@
 import { Cell } from "../types"
+import { COMP_IMPERIAL_VOL_A, COMP_IMPERIAL_VOL_B, COMP_IMPERIAL_VOL_C, CUBIC_PARTS, IMPERIAL_DISTANCE_PARTS, IMPERIAL_VOL_PARTS, convert } from "./constants"
+import { imperialDistanceUnits } from "./imperialDistance"
 
-function conversion(base: string) {
-    return base.replace(/(cubed|cubic|cube|³)/, "cb")
-        .replace(/(inches|inch)/, "in")
-        .replace(/(feets?|foots?)/, "ft")
-        .replace(/yards?/, "yd")
-        .replace(/(miles|mile)/, "mi")
-        .replace(/gallons?/, "gl")
-        .replace(/quarts?/, "qt")
-        .replace(/pints?/, "pt")
-        .replace(/cups/, "cup")
-        .replace(/\s/g, "")
-}
+const conversion = (base: string) => convert([...CUBIC_PARTS, ...IMPERIAL_VOL_PARTS, ...IMPERIAL_DISTANCE_PARTS], base)
 
+const gallon = imperialDistanceUnits.in ** 3 * 231
 
 const unitMap = {
-    cbin: 1,
-    cbft: 1728,
-    cbyd: 46656,
-    cbmi: 147197952000,
+    cuin: imperialDistanceUnits.in ** 3,
+    cuft: imperialDistanceUnits.ft ** 3,
+    cuyd: imperialDistanceUnits.yd ** 3,
+    cumi: imperialDistanceUnits.mi ** 3,
 
-    gl: 231,
-    qt: 231 / 4,
-    pt: 231 / 8,
-    cup: 231 / 16,
+    incu: imperialDistanceUnits.in ** 3,
+    ftcu: imperialDistanceUnits.ft ** 3,
+    ydcu: imperialDistanceUnits.yd ** 3,
+    micu: imperialDistanceUnits.mi ** 3,
 
-    incb: 1,
-    ftcb: 1728,
-    ydcb: 46656,
-    micb: 147197952000
+    gl: gallon,
+    qt: gallon / 4,
+    pt: gallon / 8,
+    cup: gallon / 16,
 }
 
 export function asImperialVolume(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:cubed|cubic|cube|cb|³)\s*(?:inches|inch|feets?|foots?|yards?|miles|mile|ft|yd|mi|in))(?![a-z0-9])/.exec(cell.text)
-        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:inches|inch|feets?|foots?|yards?|miles|mile|ft|yd|mi|in)(?:²|cubed|cubic|cube|³))(?![a-z0-9])/.exec(cell.text)
-        const matchC = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:gallons?|quarts?|pints?|cups?|gl|qt|pt))(?![a-z0-9])/.exec(cell.text)
-        const match = matchA ?? matchB 
+        const matchA = COMP_IMPERIAL_VOL_A.exec(cell.text)
+        const matchB = COMP_IMPERIAL_VOL_B.exec(cell.text)
+        const matchC = COMP_IMPERIAL_VOL_C.exec(cell.text)
+        const match = matchA ?? matchB ?? matchC 
         if (!match) continue 
         const unit = conversion(match[2])
+        console.log(match[2], unit)
         const scalar = unitMap[unit as keyof typeof unitMap]
         if (!scalar) continue 
 

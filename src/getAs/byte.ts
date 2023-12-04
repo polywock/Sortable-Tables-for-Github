@@ -1,20 +1,9 @@
 import { Cell } from "../types"
+import { BYTE_PARTS, COMP_BYTE, convert } from "./constants"
 
-function conversion(base: string) {
-    return base
-        .replace(/(yottabytes?|yottabits?|ybits?)/, "yb")
-        .replace(/(exabytes?|exabits?|ebits?)/, "eb")
-        .replace(/(petabytes?|petabits?|pbits?)/, "pb")
-        .replace(/(terabytes?|terabits?|tbits?)/, "tb")
-        .replace(/(gigabytes?|gigabits?|gbits?)/, "gb")
-        .replace(/(megabytes?|megabits?|mbits?)/, "mb")
-        .replace(/(kilobytes?|kilobits?|kbits?)/, "kb")
-        .replace(/(bytes?|bits?)/, "b")
-        .replace(/\s/g, "")
-}
+const conversion = (base: string) => convert(BYTE_PARTS, base)
 
-
-const unitMap = {
+const unitBytes = {
     b: 1 ** 0,
     kb: 1000 ** 1,
     mb: 1000 ** 2,
@@ -30,10 +19,11 @@ export function asByte(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(yottabytes?|yottabits?|exabytes?|exabits?|petabytes?|petabits?|terabytes?|terabits?|gigabytes?|gigabits?|megabytes?|megabits?|kilobytes?|kilobits?|ybits?|ebits?|pbits?|tbits?|gbits?|mbits?|kbits?|bytes?|bits?|kb|mb|gb|tb|pb|eb|zb|yb|b)(?![a-z0-9])/.exec(cell.text)
+        const match = COMP_BYTE.exec(cell.text)
+        console.log(cell.text, match)
         if (!match) continue 
         const unit = match[2]
-        const scalar = unitMap[conversion(unit) as keyof typeof unitMap]
+        const scalar = unitBytes[conversion(unit) as keyof typeof unitBytes]
         if (!scalar) continue 
 
         cell.number = parseFloat(match[1])

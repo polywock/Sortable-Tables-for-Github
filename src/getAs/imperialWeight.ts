@@ -1,13 +1,7 @@
 import { Cell } from "../types"
+import { COMP_IMPERIAL_WEIGHT_A, IMPERIAL_WEIGHT_PARTS, convert } from "./constants"
 
-function conversion(base: string) {
-    return base
-        .replace(/pounds?/, "lb")
-        .replace(/lbs/, "lb")
-        .replace(/tons/, "ton")
-        .replace(/(ounces|ounce)/, "oz")
-        .replace(/\s/g, "")
-}
+const conversion = (base: string) => convert([...IMPERIAL_WEIGHT_PARTS], base)
 
 const unitMap = {
     oz: 1,
@@ -19,7 +13,7 @@ export function asImperialWeight(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(tons?|pounds?|ounces|ounce|lbs?|oz)(?![a-z0-9])/.exec(cell.text)
+        const match = COMP_IMPERIAL_WEIGHT_A.exec(cell.text)
         if (!match) continue 
 
         const unit = conversion(match[2])

@@ -1,33 +1,27 @@
 import { Cell } from "../types"
+import { COMP_IMPERIAL_AREA_A, COMP_IMPERIAL_AREA_B, IMPERIAL_DISTANCE_PARTS, SQUARED_PARTS, convert } from "./constants"
+import { imperialDistanceUnits } from "./imperialDistance"
 
-function conversion(base: string) {
-    return base.replace("squared", "sq").replace("square", "sq").replace("²", "sq")
-        .replace(/(inches|inch)/, "in")
-        .replace(/(feets?|foots?)/, "ft")
-        .replace(/yards?/, "yd")
-        .replace(/(miles|mile)/, "mi")
-        .replace(/\s/g, "")
-}
-
+const conversion = (base: string) => convert([...IMPERIAL_DISTANCE_PARTS, ...SQUARED_PARTS], base)
 
 const unitMap = {
-    sqin: 1,
-    sqft: 12,
-    sqyd: 36,
-    sqmi: 72913,
+    sqin: imperialDistanceUnits.in ** 2,
+    sqft: imperialDistanceUnits.ft ** 2,
+    sqyd: imperialDistanceUnits.yd ** 2,
+    sqmi: imperialDistanceUnits.mi ** 2,
 
-    insq: 1,
-    ftsq: 12,
-    ydsq: 36,
-    misq: 72913
+    insq: imperialDistanceUnits.in ** 2,
+    ftsq: imperialDistanceUnits.ft ** 2,
+    ydsq: imperialDistanceUnits.yd ** 2,
+    misq: imperialDistanceUnits.mi ** 2,
 }
 
 export function asImperialArea(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:squared|square|sq|²)\s*(?:inches|inch|foots?|feets?|yards|miles|mile|mi|in|ft|yd))(?![a-z0-9])/.exec(cell.text)
-        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:inches|inch|foots?|feets?|yards|miles|mile|mi|in|ft|yd)\s*(?:²|squared|square|sq))(?![a-z0-9])/.exec(cell.text)
+        const matchA = COMP_IMPERIAL_AREA_A.exec(cell.text)
+        const matchB = COMP_IMPERIAL_AREA_B.exec(cell.text)
         const match = matchA ?? matchB 
         if (!match) continue 
         const unit = conversion(match[2])

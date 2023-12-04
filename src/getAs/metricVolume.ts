@@ -1,39 +1,31 @@
 import { Cell } from "../types"
+import { COMP_METRIC_VOL_A, COMP_METRIC_VOL_B, COMP_METRIC_VOL_C, CUBIC_PARTS, METRIC_DISTANCE_PARTS, METRIC_VOL_PARTS, convert } from "./constants"
+import { metricDistanceUnits } from "./metricDistance"
 
-function conversion(base: string) {
-    return base.replace("cubed", "cb").replace("cubic", "cb").replace("cube", "cb").replace("³", "cb")
-        .replace(/milliliters?/, "ml")    
-        .replace(/liters?/, "lt")    
-        .replace(/millimeters?/, "mm")
-        .replace(/centimeters?/, "cm")
-        .replace(/kilometers?/, "km")
-        .replace(/meters?/, "m")
-        .replace(/\s/g, "")
-}
-
+const conversion = (base: string) => convert([...CUBIC_PARTS, ...METRIC_VOL_PARTS, ...METRIC_DISTANCE_PARTS], base)
 
 const unitMap = {
-    lt: 1000000,
-    ml: 1000,
+    lt: metricDistanceUnits.mm ** 3 * 1000000,
+    ml: metricDistanceUnits.mm ** 3 * 1000,
 
-    cbmm: 1,
-    cbcm: 1000,
-    cbm: 1000000000,
-    cbkm: 1000000000000000000,
+    cumm: metricDistanceUnits.mm ** 3,
+    cucm: metricDistanceUnits.cm ** 3,
+    cum: metricDistanceUnits.m ** 3,
+    cukm: metricDistanceUnits.km ** 3,
 
-    mmcb: 1,
-    cmcb: 1000,
-    mcb: 1000000000,
-    kmcb: 1000000000000000000
+    mmcu: metricDistanceUnits.mm ** 3,
+    cmcu: metricDistanceUnits.cm ** 3,
+    mcu: metricDistanceUnits.m ** 3,
+    kmcu: metricDistanceUnits.km ** 3
 }
 
 export function asMetricVolume(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const matchA = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:cubed|cubic|cube|cb|³)\s*(?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m))(?![a-z0-9])/.exec(cell.text)
-        const matchB = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)\s*(?:³|cubed|cubic|cube|cb))(?![a-z0-9])/.exec(cell.text)
-        const matchC = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*((?:milliliters?|liters?|ml|lt)\s*)(?![a-z0-9])/.exec(cell.text)
+        const matchA = COMP_METRIC_VOL_A.exec(cell.text)
+        const matchB = COMP_METRIC_VOL_B.exec(cell.text)
+        const matchC = COMP_METRIC_VOL_C.exec(cell.text)
         const match = matchA ?? matchB ?? matchC 
         if (!match) continue 
         const unit = conversion(match[2])

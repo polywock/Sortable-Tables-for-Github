@@ -1,15 +1,9 @@
 import { Cell } from "../types"
+import { COMP_METRIC_DISTANCE_A, METRIC_DISTANCE_PARTS, convert } from "./constants"
 
-function conversion(base: string) {
-    return base
-        .replace("millimeters", "mm").replace("millimeter", "mm")
-        .replace("centimeters", "cm").replace("centimeter", "cm")
-        .replace("kilometers", "km").replace("kilometer", "km")
-        .replace("meters", "m").replace("meter", "m")
-        .replace(/\s/g, "")
-}
+const conversion = (base: string) => convert([...METRIC_DISTANCE_PARTS], base)
 
-const unitMap = {
+export const metricDistanceUnits = {
     mm: 1,
     cm: 10,
     m: 1000,
@@ -20,10 +14,10 @@ export function asMetricDistance(cells: Cell[]) {
     cells = [...cells]
     let units = new Set() 
     for (let cell of cells) {
-        const match = /(\d+(?:\.\d+)?)\s*[\(\-\_)]*\s*(millimeters?|centimeters?|kilometers?|meters?|mm|cm|km|m)(?![a-z0-9])/.exec(cell.text)
+        const match = COMP_METRIC_DISTANCE_A.exec(cell.text)
         if (!match) continue 
         const unit = conversion(match[2])
-        const scalar = unitMap[unit as keyof typeof unitMap]
+        const scalar = metricDistanceUnits[unit as keyof typeof metricDistanceUnits]
         if (!scalar) continue 
 
         cell.number = parseFloat(match[1])
