@@ -20,15 +20,28 @@
 | **Qwen-72B**      | **77.4** | **83.3** | **78.9** | **35.2** | **35.4**  | **52.2** | **67.7** | **83.6** |
 
 
-## Random units
-| Text  |   Weight           |  Area                   |  Volume               | Numbers     | storage      |
+## Metric / other 
+| Text  |   Weight           |  Area                   |  Volume               | Numbers     | byes         |
 |:-----:|:------------------:|:-----------------------:|:---------------------:|:-----------:|:------------:|
-| A     |   5 grams          |   10 km sq              |   3000 cm³            | 200         | 1 kb         |
+| A     |   5 grams          |   10 km sq              |   1001 cm³            | 200         | 1 kB         |
 | B     |   2001 kg          |   200 meters squared    |   1.76 cubic meters   | 3B          | 20 terabytes |   
-| C     |   100 kilo         |   3 cm²                 |   -                   | 82k         | 1.1k bytes   |
-| D     |   200 mg           |   301 mm²               |   -                   | 10 million  | 1 gb         |
-| E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  | 200 mb       | 
+| C     |   100 kilo         |   3 cm²                 |   1 liter             | 82k         | 1.1k bytes   |
+| D     |   200 mg           |   301 mm²               |   100 ml              | 10 million  | 1 gB         |
+| E     |   5001 mg          |   5,350 square meters   |   20 km cubed         | 1 trillion  | 200 mB       | 
 | F     |   1 trillion grams |   65,610 km²            |   -                   | 1,001k      | 500 exabytes |
 | G     |   2,500 tons       |   1,250 m²              |   2,500 cubic meters  | 1m          | 900 petabytes|
 | H     |   2 tons           |   -                     |   -                   | 123,456     | 1 yottabytes |
+
+
+## Imperial / other
+| Text  | Weight   |  Area                |  Volume               |  bits        |
+|:-----:|:--------:|:--------------------:|:---------------------:|-------------:|
+| A     |   5 oz   |   10 miles sq        |   3000 in³            |  1 kb        |
+| B     |   17 oz  |   200 yards squared  |   1.76 cubic feet     |  20 terabits |   
+| C     |   1 lbs  |   3 in²              |   1 gallon            |  1.1k bits   |
+| D     |   5 tons |   1 trillion mi²     |   3 quarts            |  1 gb        |
+| E     |   -      |   5,350 square yards |   2 pint              |  200 mb      | 
+| F     |   1m oz  |   65,610 mi²         |   17 cups             |  500 ebits   |
+| G     |   -      |   1,250 yd²          |   2,500 cubic yards   |  2 gbits     |
+| H     |   -      |   -                  |   -                   |  1 yottabits |
 

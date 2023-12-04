@@ -31,6 +31,7 @@ export function asMetricDistance(cells: Cell[]) {
         units.add(unit)
     }
 
+    units.delete("m")
     if (units.size >= 2) {
         return cells 
     }

@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "common": "rm -rf build && webpack --config webpack.config.js && cp -r static/. build/unpacked && find build   -name '.DS_Store' -type f -delete",
-    "test": "export NODE_ENV=development && npm run common",
+    "dev": "export NODE_ENV=development && npm run common",
     "build": "export NODE_ENV=production && npm run common && cd build/unpacked && zip -r ../packed.zip ."
   },
   "author": "aa",
